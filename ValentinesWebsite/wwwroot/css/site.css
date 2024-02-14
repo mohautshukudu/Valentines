@@ -1,0 +1,62 @@
+﻿html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.buttons {
+    margin-top: 20px;
+}
+
+.btn-success {
+    background-color: #28a745; /* Green color for "Yes" button */
+    color: #fff;
+}
+
+.btn-danger {
+    background-color: #dc3545; /* Red color for "No" button */
+    color: #fff;
+}
+
+.heart-pulse {
+    width: 150px; /* Adjust the size of the image */
+    height: auto;
+}
+
+#loadingScreen {
+    margin-top: 20px; /* Add some space below buttons */
+}
+
+#loveWords {
+    margin-top: 20px;
+}
+
+#noButton {
+    margin-left: 10px; /* Add margin between buttons */
+}
+

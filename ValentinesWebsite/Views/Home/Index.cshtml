@@ -1,0 +1,95 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<html lang="en-gb">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - My ASP.NET Application</title>
+    <!-- <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" /> -->
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+
+<body>
+
+    @{
+        ViewData["Title"] = "Will You Be My Valentine?";
+    }
+
+    <div class="container text-center">
+        <h2>Will you be my valentine?</h2>
+
+        <div class="buttons">
+            <button class="btn btn-success btn-lg" id="yesButton">Yes</button>
+            <button class="btn btn-danger btn-lg" id="noButton">No</button>
+        </div>
+
+        <div id="loadingScreen" style="display: none;">
+            <img src="~/images/heart-pulse.jpg" alt="Pulsating Heart" id="heartImage">
+        </div>
+
+        <h1 id="loveWords" style="display: none;color: red;">Here's to our first, I love you!</h1>
+    </div>
+
+    @section Scripts {
+        <script>document.getElementById('yesButton').addEventListener('click', function () {
+                document.getElementById('yesButton').style.display = 'none'; // Hide "Yes" button
+                document.getElementById('noButton').style.display = 'none'; // Hide "No" button
+                document.getElementById('loadingScreen').style.display = 'block'; // Show loading screen
+
+                // Simulate loading process
+                setTimeout(function () {
+                    document.getElementById('loadingScreen').style.display = 'none'; // Hide loading screen
+                    document.getElementById('loveWords').style.display = 'block'; // Show "Here's to our first, I love you!" text
+                }, 3000); // Adjust loading time as needed
+
+                // Start pulsing animation
+                pulseImage();
+            });
+
+            var noButtonClickCount = 0; // Count number of clicks on "No" button 
+            document.getElementById('noButton').addEventListener('click', function () {
+                if (noButtonClickCount === 0) {
+                    document.getElementById('yesButton').innerText = 'Are you sure?';
+                    document.getElementById('yesButton').classList.remove('btn-success');
+                    document.getElementById('yesButton').classList.add('btn-success');
+                    document.getElementById('yesButton').classList.add('btn-success');
+                    noButtonClickCount++;
+                } else if (noButtonClickCount === 1) {
+                    document.getElementById('yesButton').innerText = 'Are you one hundred percent sure?';
+                    document.getElementById('yesButton').classList.add('btn-lg');
+                    noButtonClickCount++;
+                } else {
+                    alert('Okay then! Maybe next time...');
+                }
+            });
+
+            // Function to pulse the image
+            function pulseImage() {
+                var heartImage = document.getElementById('heartImage');
+                var scaleFactor = 0.6; // Initial scale factor
+                var maxScaleFactor = 0.8; // Maximum scale factor
+                var steps = 110; // Number of steps in the animation
+                var animationDuration = 8000; // Animation duration in milliseconds
+                var animationStep = animationDuration / steps;
+
+                var currentStep = 0;
+                var pulseInterval = setInterval(function () {
+                    currentStep++;
+                    var progress = currentStep / steps;
+                    scaleFactor = (1 - Math.abs(2 * progress - 1)); // Use a sinusoidal function to smooth the scaling effect
+                    scaleFactor = Math.min(scaleFactor, maxScaleFactor); // Limit the scale factor to the maximum value
+                    heartImage.style.transform = 'scale(' + scaleFactor + ')';
+
+                    if (currentStep >= steps) {
+                        clearInterval(pulseInterval); // Stop the animation after reaching the specified duration
+                    }
+                }, animationStep);
+            }</script>
+    }
+
+    <footer class="footer">
+    </footer>
+</body>
+</html>
